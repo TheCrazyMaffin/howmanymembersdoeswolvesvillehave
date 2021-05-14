@@ -24,19 +24,16 @@
 <body>
   <div class="hcenter vcenter">
     <h2>How many members does the Wolvesville Discord have?</h2>
-    <h1>approx. <span id="count"><h6>If there's no number here you are probably getting rate-limited because you are reloading this page too often. Go do something else</h6></span></h1>
+    <h1>approx. <span id="count"><span style="font-size: 20%;">If there's no number here you are probably getting rate-limited because you are reloading this page too often. Go do something else</span></span></h1>
   </div>
   <script>
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-      mode: 'no-cors'
-    };
-
-    fetch("https://discord.com/api/invites/wolvesville?with_counts=true", requestOptions)
-      .then(async (response) => {
+    fetch('https://discord.com/api/invites/wolvesville?with_counts=true').then(function (response) {
+      response.text().then(async function (data) {
         document.querySelector("#count").innerText = (await response.json()).approximate_member_count;
-      }).catch(console.log);
+      }).catch(function (err) {
+          console.warn('Something went wrong.', err);
+      }); 
+    })      
   </script>
 </body>
 </html>
