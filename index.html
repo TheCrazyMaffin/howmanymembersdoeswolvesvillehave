@@ -29,15 +29,14 @@
   <script>
     var requestOptions = {
       method: 'GET',
-      redirect: 'follow'
+      redirect: 'follow',
+      mode: 'no-cors'
     };
 
     fetch("https://discord.com/api/invites/wolvesville?with_counts=true", requestOptions)
       .then(async (response) => {
-        document.querySelector("#count").innerText = (await response.json()).approximate_member_count
-      })
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+        document.querySelector("#count").innerText = (await response.json()).approximate_member_count;
+      });
   </script>
 </body>
 </html>
