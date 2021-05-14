@@ -28,12 +28,12 @@
   </div>
   <script>
     fetch('https://discord.com/api/invites/wolvesville?with_counts=true').then(function (response) {
-      response.text().then(async function (data) {
-        document.querySelector("#count").innerText = (await response.json()).approximate_member_count;
-      }).catch(function (err) {
-          console.warn('Something went wrong.', err);
-      }); 
-    })      
+      return response.json();
+    }).then(function (data) {
+      document.querySelector("#count").innerText = data.approximate_member_count;
+    }).catch(function (err) {
+      console.warn('Something went wrong.', err);
+    });  
   </script>
 </body>
 </html>
